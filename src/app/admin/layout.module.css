@@ -1,0 +1,4 @@
+.section {
+  padding: var(--space-8) 0;
+  min-height: calc(100vh - var(--header-height) - 200px);
+}

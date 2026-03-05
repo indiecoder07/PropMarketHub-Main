@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PropMarketHub">
+  <rect width="64" height="64" rx="12" fill="#ffffff"/>
+  <path d="M10 31L32 12L54 31" fill="none" stroke="#0f172a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 31V49" stroke="#1a56db" stroke-width="6" stroke-linecap="round"/>
+  <path d="M28 27V49" stroke="#16a34a" stroke-width="6" stroke-linecap="round"/>
+  <path d="M38 23V49" stroke="#d97706" stroke-width="6" stroke-linecap="round"/>
+  <path d="M48 19V49" stroke="#1a56db" stroke-width="6" stroke-linecap="round"/>
+  <rect x="8" y="49" width="48" height="4" rx="2" fill="#0f172a"/>
+</svg>
