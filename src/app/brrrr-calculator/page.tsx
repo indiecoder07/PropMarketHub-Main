@@ -124,7 +124,7 @@ Refinance loan = ARV × LVR (typically 80%)
 Money left in deal = Total all-in cost − Refinance loan`}
                 </span>
                 <span className={styles.formulaNote}>
-                  A negative MLID means you have pulled out more than you put in — you have "manufactured" a deposit for your next deal from nothing. A positive MLID means some capital remains in the property.
+                  A negative MLID means you have pulled out more than you put in — you have &quot;manufactured&quot; a deposit for your next deal from nothing. A positive MLID means some capital remains in the property.
                 </span>
               </div>
 
@@ -164,7 +164,7 @@ Money left in deal = Total all-in cost − Refinance loan`}
                   </div>
                 </div>
                 <p className={styles.exampleNote}>
-                  This deal is effectively "money out" — the investor recovers all $540,000 invested plus an extra $4,000 that can go toward the next deal. The property is now positively or neutrally geared at $680,000 value with a $544,000 loan (80% LVR), generating rental income and long-term capital growth.
+                  This deal is effectively &quot;money out&quot; — the investor recovers all $540,000 invested plus an extra $4,000 that can go toward the next deal. The property is now positively or neutrally geared at $680,000 value with a $544,000 loan (80% LVR), generating rental income and long-term capital growth.
                 </p>
               </div>
             </div>

@@ -134,7 +134,7 @@ export default function StampDutyCalculatorPage() {
                 Stamp duty is not charged at a flat rate on the whole purchase price. Instead, your
                 purchase price is divided into brackets, and each bracket is taxed at its own rate —
                 similar to income tax. Only the portion of the price that falls within each bracket
-                is taxed at that bracket's rate. The total duty is the sum of each bracket's
+                  is taxed at that bracket&apos;s rate. The total duty is the sum of each bracket&apos;s
                 contribution.
               </p>
 
