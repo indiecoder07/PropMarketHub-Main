@@ -1,0 +1,7 @@
+'use client';
+import { createContext, useContext, useMemo, useState } from 'react';
+const ExtraRepaymentCalculatorContext = createContext(null);
+function formatThousands(v){return new Intl.NumberFormat('en-AU').format(v);} function parseDigits(v){return v.replace(/[^\d]/g,'');}
+function useCurrencyField(i){const [value,setValue]=useState(i); const [valueInput,setValueInput]=useState(formatThousands(i)); const setValueFromInput=(input)=>{const d=parseDigits(input); if(!d){setValue(0);setValueInput('');return;} const n=Number(d); setValue(n); setValueInput(formatThousands(n));}; return {value,valueInput,setValueFromInput};}
+export function ExtraRepaymentCalculatorProvider({children}){const loanAmount=useCurrencyField(650000); const extraMonthly=useCurrencyField(300); const lumpSum=useCurrencyField(10000); const [rate,setRate]=useState(6.1); const [termYears,setTermYears]=useState(30); const [lumpSumYear,setLumpSumYear]=useState(2); const value=useMemo(()=>({loanAmount,extraMonthly,lumpSum,rate,setRate,termYears,setTermYears,lumpSumYear,setLumpSumYear}),[loanAmount,extraMonthly,lumpSum,rate,termYears,lumpSumYear]); return <ExtraRepaymentCalculatorContext.Provider value={value}>{children}</ExtraRepaymentCalculatorContext.Provider>;}
+export function useExtraRepaymentCalculatorContext(){const c=useContext(ExtraRepaymentCalculatorContext); if(!c) throw new Error('useExtraRepaymentCalculatorContext must be used inside <ExtraRepaymentCalculatorProvider>'); return c;}

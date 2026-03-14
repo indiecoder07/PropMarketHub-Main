@@ -1,0 +1,7 @@
+'use client';
+import { createContext, useContext, useMemo, useState } from 'react';
+const NegativeGearingCalculatorContext = createContext(null);
+function formatThousands(v){return new Intl.NumberFormat('en-AU').format(v);} function parseDigits(v){return v.replace(/[^\d]/g,'');}
+function useCurrencyField(i){const [value,setValue]=useState(i); const [valueInput,setValueInput]=useState(formatThousands(i)); const setValueFromInput=(input)=>{const d=parseDigits(input); if(!d){setValue(0);setValueInput('');return;} const n=Number(d); setValue(n); setValueInput(formatThousands(n));}; return {value,valueInput,setValueFromInput};}
+export function NegativeGearingCalculatorProvider({children}){const annualRent=useCurrencyField(42000); const interestCost=useCurrencyField(32000); const otherExpenses=useCurrencyField(9000); const depreciation=useCurrencyField(6000); const [taxRatePct,setTaxRatePct]=useState(39); const value=useMemo(()=>({annualRent,interestCost,otherExpenses,depreciation,taxRatePct,setTaxRatePct}),[annualRent,interestCost,otherExpenses,depreciation,taxRatePct]); return <NegativeGearingCalculatorContext.Provider value={value}>{children}</NegativeGearingCalculatorContext.Provider>;}
+export function useNegativeGearingCalculatorContext(){const c=useContext(NegativeGearingCalculatorContext); if(!c) throw new Error('useNegativeGearingCalculatorContext must be used inside <NegativeGearingCalculatorProvider>'); return c;}

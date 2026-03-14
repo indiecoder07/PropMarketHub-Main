@@ -1,0 +1,7 @@
+'use client';
+import { createContext, useContext, useMemo, useState } from 'react';
+const PropertyPurchaseCostsCalculatorContext = createContext(null);
+function formatThousands(v){return new Intl.NumberFormat('en-AU').format(v);} function parseDigits(v){return v.replace(/[^\d]/g,'');}
+function useCurrencyField(i){const [value,setValue]=useState(i); const [valueInput,setValueInput]=useState(formatThousands(i)); const setValueFromInput=(input)=>{const d=parseDigits(input); if(!d){setValue(0);setValueInput('');return;} const n=Number(d); setValue(n); setValueInput(formatThousands(n));}; return {value,valueInput,setValueFromInput};}
+export function PropertyPurchaseCostsCalculatorProvider({children}){const purchasePrice=useCurrencyField(850000); const stampDuty=useCurrencyField(33000); const legalFees=useCurrencyField(2500); const inspections=useCurrencyField(800); const loanFees=useCurrencyField(1200); const movingCosts=useCurrencyField(1500); const value=useMemo(()=>({purchasePrice,stampDuty,legalFees,inspections,loanFees,movingCosts}),[purchasePrice,stampDuty,legalFees,inspections,loanFees,movingCosts]); return <PropertyPurchaseCostsCalculatorContext.Provider value={value}>{children}</PropertyPurchaseCostsCalculatorContext.Provider>;}
+export function usePropertyPurchaseCostsCalculatorContext(){const c=useContext(PropertyPurchaseCostsCalculatorContext); if(!c) throw new Error('usePropertyPurchaseCostsCalculatorContext must be used inside <PropertyPurchaseCostsCalculatorProvider>'); return c;}

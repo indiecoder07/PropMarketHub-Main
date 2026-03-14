@@ -6,9 +6,28 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: var(--space-8);
   margin-bottom: var(--space-10);
+}
+
+.brand {
+  /* takes up the wider first column */
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .brandName {

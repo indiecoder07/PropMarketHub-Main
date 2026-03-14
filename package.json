@@ -6,6 +6,10 @@
     "node": ">=18.17 <21"
   },
   "scripts": {
+    "check:node": "node scripts/check-node-version.cjs",
+    "predev": "npm run check:node",
+    "prebuild": "npm run check:node",
+    "prestart": "npm run check:node",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

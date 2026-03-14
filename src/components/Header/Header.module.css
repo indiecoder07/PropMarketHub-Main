@@ -55,7 +55,11 @@
   color: var(--color-primary);
   background: var(--color-primary-light);
   text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
   transition: var(--transition-fast);
+  white-space: nowrap;
 }
 
 .toolLink:hover {
@@ -182,6 +186,72 @@
   border: none;
   border-top: 1px solid var(--color-border);
   margin: var(--space-2) 0;
+}
+
+/* ── Mobile grouped sections ─────────────────────────────────── */
+.mobileGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileGroupBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-align: left;
+}
+
+.mobileGroupLinks {
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--color-primary-light);
+  margin-left: 4px;
+  margin-bottom: var(--space-1);
+}
+
+.mobileChildLink {
+  padding: 6px 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.mobileChildLink:hover,
+.mobileChildLinkActive {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.chevronDown {
+  transition: transform var(--transition-fast);
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+  transition: transform var(--transition-fast);
+}
+
+/* ── Dropdown active link ─────────────────────────────────────── */
+.dropdownLinkActive {
+  background: var(--color-primary-light);
+  color: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+/* ── toolLink active state ────────────────────────────────────── */
+.toolLinkActive {
+  background: var(--color-primary) !important;
+  color: var(--color-white) !important;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,5 @@
+'use client';
+import { useMemo } from 'react';
+import { useHomeEquityCalculatorContext } from '@/context/HomeEquityCalculatorContext';
+const AUD = new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:0});
+export function useHomeEquityCalculator(){const {propertyValue,loanBalance,targetLvr,setTargetLvr}=useHomeEquityCalculatorContext(); const results=useMemo(()=>{if(propertyValue.value<=0) return null; const totalEquity=Math.max(0,propertyValue.value-loanBalance.value); const maxLending=propertyValue.value*(targetLvr/100); const usableEquity=Math.max(0,maxLending-loanBalance.value); return {totalEquity,maxLending,usableEquity,currentLvr: propertyValue.value>0?(loanBalance.value/propertyValue.value)*100:0};},[propertyValue.value,loanBalance.value,targetLvr]); return {propertyValueInput:propertyValue.valueInput,setPropertyValueFromInput:propertyValue.setValueFromInput,loanBalanceInput:loanBalance.valueInput,setLoanBalanceFromInput:loanBalance.setValueFromInput,targetLvr,setTargetLvr,results,formatCurrency:(v)=>AUD.format(v)};}

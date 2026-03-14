@@ -1,0 +1,7 @@
+'use client';
+import { createContext, useContext, useMemo, useState } from 'react';
+const BRRRRCalculatorContext = createContext(null);
+function formatThousands(v){return new Intl.NumberFormat('en-AU').format(v);} function parseDigits(v){return v.replace(/[^\d]/g,'');}
+function useCurrencyField(i){const [value,setValue]=useState(i); const [valueInput,setValueInput]=useState(formatThousands(i)); const setValueFromInput=(input)=>{const d=parseDigits(input); if(!d){setValue(0);setValueInput('');return;} const n=Number(d); setValue(n); setValueInput(formatThousands(n));}; return {value,valueInput,setValueFromInput};}
+export function BRRRRCalculatorProvider({children}){const purchasePrice=useCurrencyField(500000); const rehabCost=useCurrencyField(80000); const afterRepairValue=useCurrencyField(720000); const weeklyRent=useCurrencyField(780); const annualExpenses=useCurrencyField(14000); const [refiLvr,setRefiLvr]=useState(80); const [refiRate,setRefiRate]=useState(6.2); const value=useMemo(()=>({purchasePrice,rehabCost,afterRepairValue,weeklyRent,annualExpenses,refiLvr,setRefiLvr,refiRate,setRefiRate}),[purchasePrice,rehabCost,afterRepairValue,weeklyRent,annualExpenses,refiLvr,refiRate]); return <BRRRRCalculatorContext.Provider value={value}>{children}</BRRRRCalculatorContext.Provider>;}
+export function useBRRRRCalculatorContext(){const c=useContext(BRRRRCalculatorContext); if(!c) throw new Error('useBRRRRCalculatorContext must be used inside <BRRRRCalculatorProvider>'); return c;}
