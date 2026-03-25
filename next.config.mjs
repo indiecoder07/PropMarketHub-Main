@@ -3,7 +3,7 @@ const nextConfig = {
   // Proxy /suburb-scorecard/* to the Vite app's Vercel deployment
   async rewrites() {
     const scorecardUrl =
-      process.env.SUBURB_SCORECARD_URL || 'https://your-suburb-scorecard.vercel.app';
+      process.env.SUBURB_SCORECARD_URL || 'https://suburb-scorecard.vercel.app';
 
     return [
       {
