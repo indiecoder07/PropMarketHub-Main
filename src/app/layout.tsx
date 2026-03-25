@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
 import './globals.css';
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <main className={styles.main}>{children}</main>
           <Footer />
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
