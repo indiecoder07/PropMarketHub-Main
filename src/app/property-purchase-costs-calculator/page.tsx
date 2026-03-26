@@ -15,11 +15,15 @@ export const metadata: Metadata = {
     siteName: 'PropMarketHub',
     locale: 'en_AU',
     type: 'website',
+    images: [{ url: 'https://propmarkethub.com.au/og-image.png', width: 1200, height: 630, alt: 'PropMarketHub — Free Property Investment Tools for Australia' }],
+  
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Property Purchase Costs Calculator Australia | PropMarketHub',
     description: 'Calculate all property purchase costs — stamp duty, legal fees, inspections. Free Australian calculator.',
+    images:      ['https://propmarkethub.com.au/og-image.png'],
+  
   },
 };
 

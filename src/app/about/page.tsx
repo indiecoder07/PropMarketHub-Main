@@ -45,11 +45,19 @@ const schema = {
       description:   'Free, data-driven property investment tools for Australian investors.',
       logo: {
         '@type':     'ImageObject',
-        url:         'https://propmarkethub.com.au/og-image.png',
-        width:       1200,
-        height:      630,
+        url:         'https://propmarkethub.com.au/propmarkethub-logo.png',
+        width:       200,
+        height:      60,
       },
-      sameAs: ['https://twitter.com/propmarkethub'],
+      sameAs: [
+        'https://twitter.com/propmarkethub',
+        'https://www.linkedin.com/company/propmarkethub',
+      ],
+      foundingDate: '2024',
+      areaServed: {
+        '@type':  'Country',
+        name:     'Australia',
+      },
     },
   ],
 };
@@ -97,10 +105,53 @@ export default function AboutPage() {
             </p>
           </div>
 
+          {/* Data sources */}
+          <div className={styles.dataSection}>
+            <h2 className={styles.dataSectionHeading}>Our data sources</h2>
+            <p>
+              Every metric in the Suburb Scorecard is sourced from authoritative Australian datasets
+              and updated approximately monthly. No data is modelled or interpolated without
+              disclosure.
+            </p>
+            <div className={styles.dataGrid}>
+              <div className={styles.dataItem}>
+                <span className={styles.dataSource}>ABS Census 2021</span>
+                <p className={styles.dataDesc}>Population growth, median household income, and demographic trends for all 488 NSW suburbs.</p>
+              </div>
+              <div className={styles.dataItem}>
+                <span className={styles.dataSource}>Domain API</span>
+                <p className={styles.dataDesc}>Median sale price trends and listing data, updated monthly from live market activity.</p>
+              </div>
+              <div className={styles.dataItem}>
+                <span className={styles.dataSource}>SQM Research</span>
+                <p className={styles.dataDesc}>Rental vacancy rates — the proportion of rental listings sitting empty at any given time.</p>
+              </div>
+              <div className={styles.dataItem}>
+                <span className={styles.dataSource}>NSW Valuer General</span>
+                <p className={styles.dataDesc}>Gross rental yield calculated from assessed land values and median rental data.</p>
+              </div>
+              <div className={styles.dataItem}>
+                <span className={styles.dataSource}>CoreLogic</span>
+                <p className={styles.dataDesc}>Infrastructure pipeline scoring based on proximity to planned transport, schools, and commercial development.</p>
+              </div>
+              <div className={styles.dataItem}>
+                <span className={styles.dataSource}>RBA / APRA</span>
+                <p className={styles.dataDesc}>Interest rate assumptions and borrowing power calculations reflect current RBA cash rate guidance.</p>
+              </div>
+            </div>
+          </div>
+
           <p>
             PropMarketHub is independently built and not affiliated with any real estate agency,
             lender, or financial institution. All tools are for informational and educational
             purposes only — not financial advice.
+          </p>
+
+          <p className={styles.disclaimerBox}>
+            <strong>Disclaimer:</strong> PropMarketHub calculators and suburb scores are for
+            informational purposes only and do not constitute financial, investment, or legal advice.
+            Always consult a licensed financial adviser before making property investment decisions.
+            Past performance and historical data are not reliable indicators of future results.
           </p>
 
           <div className={styles.ctaRow}>

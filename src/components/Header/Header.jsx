@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
@@ -62,8 +63,14 @@ export function Header() {
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" aria-label="PropMarketHub home" className={styles.logoLink}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/propmarkethub-logo.png" alt="PropMarketHub" className={styles.logo} />
+          <Image
+            src="/propmarkethub-logo.png"
+            alt="PropMarketHub"
+            width={160}
+            height={40}
+            className={styles.logo}
+            priority
+          />
         </Link>
 
         <span className={styles.divider} />

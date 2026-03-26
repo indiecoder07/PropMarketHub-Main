@@ -15,11 +15,15 @@ export const metadata: Metadata = {
     siteName: 'PropMarketHub',
     locale: 'en_AU',
     type: 'website',
+    images: [{ url: 'https://propmarkethub.com.au/og-image.png', width: 1200, height: 630, alt: 'PropMarketHub — Free Property Investment Tools for Australia' }],
+  
   },
   twitter: {
     card: 'summary_large_image',
     title: 'BRRRR Calculator Australia | PropMarketHub',
     description: 'Model the BRRRR property strategy — renovation uplift, refinance equity, and cash recycled. Free Australian tool.',
+    images:      ['https://propmarkethub.com.au/og-image.png'],
+  
   },
 };
 

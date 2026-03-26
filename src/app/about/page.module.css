@@ -81,3 +81,61 @@
   color: var(--color-primary);
   font-weight: 600;
 }
+
+/* ── Data sources section ─────────────────────────────────── */
+.dataSection {
+  margin-top: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.dataSectionHeading {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-4);
+}
+
+.dataGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.dataItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dataSource {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.dataDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ── Disclaimer box ───────────────────────────────────────── */
+.disclaimerBox {
+  padding: var(--space-4);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+@media (min-width: 40rem) {
+  .dataGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

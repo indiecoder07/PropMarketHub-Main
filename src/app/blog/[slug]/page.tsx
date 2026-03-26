@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/db';
-import { formatDate } from '@/lib/utils';
+import { formatDate, stripYamlFrontmatter } from '@/lib/utils';
 import { ShareButtons } from '@/components/ShareButtons/ShareButtons';
 import styles from './page.module.css';
 
@@ -81,7 +81,25 @@ export default async function BlogPostPage({ params }: PageProps) {
     description:   post.excerpt,
     datePublished: post.created_at,
     dateModified:  post.updated_at,
-    author:        { '@type': 'Organization', name: post.author },
+    publisher: {
+      '@type': 'Organization',
+      name:    'PropMarketHub',
+      url:     'https://propmarkethub.com.au',
+      logo: {
+        '@type': 'ImageObject',
+        url:     'https://propmarkethub.com.au/propmarkethub-logo.png',
+      },
+    },
+    author: {
+      '@type': 'Person',
+      name:    post.author,
+      url:     'https://propmarkethub.com.au/about',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id':   `https://propmarkethub.com.au/blog/${post.slug}`,
+    },
+    inLanguage: 'en-AU',
     ...(post.cover_image && { image: post.cover_image }),
   };
 
@@ -132,8 +150,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Content */}
-          <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
+          {/* Content — frontmatter stripped defensively in case content was imported with YAML headers */}
+          <div className="prose" dangerouslySetInnerHTML={{ __html: stripYamlFrontmatter(post.content) }} />
 
           {/* Share */}
           <ShareButtons

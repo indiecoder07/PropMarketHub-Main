@@ -15,11 +15,15 @@ export const metadata: Metadata = {
     siteName: 'PropMarketHub',
     locale: 'en_AU',
     type: 'website',
+    images: [{ url: 'https://propmarkethub.com.au/og-image.png', width: 1200, height: 630, alt: 'PropMarketHub — Free Property Investment Tools for Australia' }],
+  
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Loan Comparison Calculator Australia | PropMarketHub',
     description: 'Compare two loan scenarios by rate, fees, and total cost. Free Australian home loan comparison tool.',
+    images:      ['https://propmarkethub.com.au/og-image.png'],
+  
   },
 };
 
