@@ -5,7 +5,7 @@ import { CashFlowCalculator } from '@/features/CashFlowCalculator/CashFlowCalcul
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Property Cash Flow Calculator Australia — Weekly & Annual Cash Flow — PropMarketHub',
+  title: 'Property Cash Flow Calculator Australia — Weekly & Annual Cash Flow',
   description: 'Calculate weekly and annual cash flow on an Australian investment property — rental income minus mortgage, rates, insurance, management, and all holding costs.',
   alternates: { canonical: 'https://propmarkethub.com.au/cash-flow-calculator' },
   robots: { index: true, follow: true },

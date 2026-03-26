@@ -4,7 +4,7 @@ import { RentalYieldCalculator } from '@/features/RentalYieldCalculator/RentalYi
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title:       'Free Rental Yield Calculator Australia — Gross & Net Yield — PropMarketHub',
+  title:       'Free Rental Yield Calculator Australia — Gross & Net Yield',
   description: 'Calculate gross and net rental yield on any Australian investment property. Enter property value, weekly rent, and annual expenses to see your real return on investment.',
   alternates:  { canonical: 'https://propmarkethub.com.au/rental-yield-calculator' },
   robots:      { index: true, follow: true },

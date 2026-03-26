@@ -4,7 +4,7 @@ import { StampDutyCalculator } from '@/features/StampDutyCalculator/StampDutyCal
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title:       'Free Stamp Duty Calculator Australia — All States 2024–25 — PropMarketHub',
+  title:       'Free Stamp Duty Calculator Australia — All States 2025–26',
   description: 'Calculate stamp duty for any Australian state or territory. Covers NSW, VIC, QLD, WA, SA, TAS, ACT and NT with 2024–25 rates. Includes first home buyer concessions.',
   alternates:  { canonical: 'https://propmarkethub.com.au/stamp-duty-calculator' },
   robots:      { index: true, follow: true },

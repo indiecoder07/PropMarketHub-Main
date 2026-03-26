@@ -4,7 +4,7 @@ import { NegativeGearingCalculator } from '@/features/NegativeGearingCalculator/
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Negative Gearing Calculator Australia — Tax Benefit Estimate — PropMarketHub',
+  title: 'Negative Gearing Calculator Australia — Tax Benefit Estimate',
   description: 'Estimate the annual tax benefit and after-tax cash flow from a negatively geared Australian investment property.',
   alternates: { canonical: 'https://propmarkethub.com.au/negative-gearing-calculator' },
   robots: { index: true, follow: true },

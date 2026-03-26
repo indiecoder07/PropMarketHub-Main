@@ -258,103 +258,121 @@ export function HouseLandPackageCalculator({ className = '' }) {
         {/* ── Right: Results ── */}
         <section className={styles.resultsPanel} aria-label="Stage repayment results" aria-live="polite">
 
-          <div className={styles.summaryGrid}>
-            <article className={styles.summaryCard}>
-              <h3 className={styles.cardTitle}>At completion — IO</h3>
-              <p className={styles.cardValue}>{summary.ioFinal}</p>
-              <p className={styles.cardSub}>/ month</p>
-            </article>
-            <article className={styles.summaryCard}>
-              <h3 className={styles.cardTitle}>At completion — P&amp;I</h3>
-              <p className={styles.cardValue}>{summary.piFinal}</p>
-              <p className={styles.cardSub}>/ month</p>
-            </article>
-            <article className={styles.summaryCard}>
-              <h3 className={styles.cardTitle}>Construction IO interest</h3>
-              <p className={styles.cardValue}>{summary.constructionIoInterest}</p>
-              <p className={styles.cardSub}>total during build</p>
-            </article>
-            <article className={styles.summaryCard}>
-              <h3 className={styles.cardTitle}>Construction P&amp;I interest</h3>
-              <p className={styles.cardValue}>{summary.constructionPiInterest}</p>
-              <p className={styles.cardSub}>total during build</p>
-            </article>
-            <article className={[styles.summaryCard, styles.summaryCardAccent].join(' ')}>
-              <h3 className={styles.cardTitle}>IO repayment at settlement</h3>
-              <p className={styles.cardValue}>{summary.ioCurrent}</p>
-              <p className={styles.cardSub}>/ month</p>
-            </article>
-            <article className={[styles.summaryCard, styles.summaryCardAccent].join(' ')}>
-              <h3 className={styles.cardTitle}>P&amp;I repayment at settlement</h3>
-              <p className={styles.cardValue}>{summary.piCurrent}</p>
-              <p className={styles.cardSub}>/ month</p>
-            </article>
-            <article className={[styles.summaryCardWide, styles.summaryCardGap].join(' ')}>
-              <h3 className={styles.cardTitle}>Cumulative gap — P&amp;I pays more during build by</h3>
-              <p className={styles.cardValue}>{summary.repaymentGap}</p>
-            </article>
-          </div>
-
-          {/* ── Timeline ── */}
-          <div className={styles.timelineWrap}>
-            <div className={styles.timelineHeader}>
-              <h3 className={styles.timelineHeading}>Monthly EMI timeline</h3>
-              <button
-                type="button"
-                className={styles.timelineToggle}
-                onClick={toggleTimeline}
-              >
-                {showFullTimeline
-                  ? 'Stage changes only'
-                  : `Show all ${totalTimelineRows} months`}
-              </button>
+          {errors.length > 0 ? (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyStateText}>
+                Fix the errors on the left to see repayment results.
+              </p>
             </div>
-            <p className={styles.timelineHint}>
-              {showFullTimeline
-                ? 'Showing every month of the full loan tenure.'
-                : 'Showing months where a drawdown changes your repayment.'}
-            </p>
-            <div className={styles.timelineTableWrap}>
-              <table className={styles.timelineTable}>
-                <thead>
-                  <tr>
-                    <th>{tableColumns.month}</th>
-                    <th>{tableColumns.event}</th>
-                    <th>{tableColumns.drawnBalance}</th>
-                    <th className={styles.thYour}>{tableColumns.yourRepayment}</th>
-                    <th className={styles.thYour}>{tableColumns.yourChange}</th>
-                    <th>{tableColumns.ioRepayment}</th>
-                    <th>{tableColumns.piRepayment}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {timelineRows.map((row) => (
-                    <tr key={`${row.month}-${row.stageEvent}`} className={row.isStageChange ? styles.stageRow : ''}>
-                      <td>{row.monthLabel}</td>
-                      <td>{row.stageEvent}</td>
-                      <td>{row.drawnBalanceFormatted}</td>
-                      <td className={styles.tdYour}>{row.yourRepaymentFormatted}</td>
-                      <td className={[styles.tdYour, Number(row.selectedIncrease) > 0 ? styles.tdIncrease : ''].filter(Boolean).join(' ')}>
-                        {row.yourChangeFormatted}
-                      </td>
-                      <td className={styles.tdRef}>{row.ioRepaymentFormatted}</td>
-                      <td className={styles.tdRef}>{row.piRepaymentFormatted}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          ) : (
+            <>
+              <div className={styles.summaryGrid}>
+                <article className={styles.summaryCard}>
+                  <h3 className={styles.cardTitle}>At completion — IO</h3>
+                  <p className={styles.cardValue}>{summary.ioFinal}</p>
+                  <p className={styles.cardSub}>/ month</p>
+                </article>
+                <article className={styles.summaryCard}>
+                  <h3 className={styles.cardTitle}>At completion — P&amp;I</h3>
+                  <p className={styles.cardValue}>{summary.piFinal}</p>
+                  <p className={styles.cardSub}>/ month</p>
+                </article>
+                <article className={styles.summaryCard}>
+                  <h3 className={styles.cardTitle}>Construction IO interest</h3>
+                  <p className={styles.cardValue}>{summary.constructionIoInterest}</p>
+                  <p className={styles.cardSub}>total during build</p>
+                </article>
+                <article className={styles.summaryCard}>
+                  <h3 className={styles.cardTitle}>Construction P&amp;I interest</h3>
+                  <p className={styles.cardValue}>{summary.constructionPiInterest}</p>
+                  <p className={styles.cardSub}>total during build</p>
+                </article>
+                <article className={[styles.summaryCard, styles.summaryCardAccent].join(' ')}>
+                  <h3 className={styles.cardTitle}>IO repayment at settlement</h3>
+                  <p className={styles.cardValue}>{summary.ioCurrent}</p>
+                  <p className={styles.cardSub}>/ month</p>
+                </article>
+                <article className={[styles.summaryCard, styles.summaryCardAccent].join(' ')}>
+                  <h3 className={styles.cardTitle}>P&amp;I repayment at settlement</h3>
+                  <p className={styles.cardValue}>{summary.piCurrent}</p>
+                  <p className={styles.cardSub}>/ month</p>
+                </article>
+                <article className={[styles.summaryCardWide, styles.summaryCardGap].join(' ')}>
+                  <h3 className={styles.cardTitle}>Cumulative gap — P&amp;I pays more during build by</h3>
+                  <p className={styles.cardValue}>{summary.repaymentGap}</p>
+                </article>
+              </div>
 
-          <div className={styles.assumptionsBox}>
-            <h3 className={styles.assumptionsHeading}>Model assumptions</h3>
-            <ul className={styles.assumptionsList}>
-              <li>Rate is constant across all months.</li>
-              <li>Interest is modelled monthly rather than daily accrual.</li>
-              <li>Outputs exclude lender fees, LMI, and tax impacts.</li>
-              <li>Construction timing is based on your stage month inputs.</li>
-            </ul>
-          </div>
+              {/* ── Timeline ── */}
+              <div className={styles.timelineWrap}>
+                <div className={styles.timelineHeader}>
+                  <h3 className={styles.timelineHeading}>Monthly EMI timeline</h3>
+                  <button
+                    type="button"
+                    className={styles.timelineToggle}
+                    onClick={toggleTimeline}
+                  >
+                    {showFullTimeline
+                      ? 'Stage changes only'
+                      : `Show all ${totalTimelineRows} months`}
+                  </button>
+                </div>
+                <p className={styles.timelineHint}>
+                  {showFullTimeline
+                    ? 'Showing every month of the full loan tenure.'
+                    : 'Showing months where a drawdown changes your repayment.'}
+                </p>
+                <div className={styles.timelineTableWrap}>
+                  <table className={styles.timelineTable}>
+                    <thead>
+                      <tr>
+                        <th>{tableColumns.month}</th>
+                        <th>{tableColumns.event}</th>
+                        <th>{tableColumns.drawnBalance}</th>
+                        <th className={styles.thYour}>{tableColumns.yourRepayment}</th>
+                        <th className={styles.thYour}>{tableColumns.yourChange}</th>
+                        <th>{tableColumns.ioRepayment}</th>
+                        <th>{tableColumns.piRepayment}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {timelineRows.length === 0 ? (
+                        <tr>
+                          <td colSpan={7} className={styles.emptyTableCell}>
+                            No timeline data — check stage percentages total 100%.
+                          </td>
+                        </tr>
+                      ) : (
+                        timelineRows.map((row) => (
+                          <tr key={`${row.month}-${row.stageEvent}`} className={row.isStageChange ? styles.stageRow : ''}>
+                            <td>{row.monthLabel}</td>
+                            <td>{row.stageEvent}</td>
+                            <td>{row.drawnBalanceFormatted}</td>
+                            <td className={styles.tdYour}>{row.yourRepaymentFormatted}</td>
+                            <td className={[styles.tdYour, Number(row.selectedIncrease) > 0 ? styles.tdIncrease : ''].filter(Boolean).join(' ')}>
+                              {row.yourChangeFormatted}
+                            </td>
+                            <td className={styles.tdRef}>{row.ioRepaymentFormatted}</td>
+                            <td className={styles.tdRef}>{row.piRepaymentFormatted}</td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className={styles.assumptionsBox}>
+                <h3 className={styles.assumptionsHeading}>Model assumptions</h3>
+                <ul className={styles.assumptionsList}>
+                  <li>Rate is constant across all months.</li>
+                  <li>Interest is modelled monthly rather than daily accrual.</li>
+                  <li>Outputs exclude lender fees, LMI, and tax impacts.</li>
+                  <li>Construction timing is based on your stage month inputs.</li>
+                </ul>
+              </div>
+            </>
+          )}
         </section>
       </div>
 

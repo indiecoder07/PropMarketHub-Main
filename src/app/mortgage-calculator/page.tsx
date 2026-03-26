@@ -4,7 +4,7 @@ import { MortgageCalculator } from '@/features/MortgageCalculator/MortgageCalcul
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title:       'Free Mortgage Repayment Calculator Australia — PropMarketHub',
+  title:       'Free Mortgage Repayment Calculator Australia',
   description: 'Calculate your Australian mortgage repayments instantly. Enter property price, deposit, interest rate and loan term to see monthly, fortnightly and weekly repayments, total interest, and LVR.',
   alternates:  { canonical: 'https://propmarkethub.com.au/mortgage-calculator' },
   robots:      { index: true, follow: true },

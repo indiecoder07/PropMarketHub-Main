@@ -12,7 +12,7 @@ import styles from './page.module.css';
 const PAGE_URL = `https://propmarkethub.com.au${HOUSE_LAND_CALCULATOR_ROUTE}`;
 
 export const metadata: Metadata = {
-  title: 'House & Land Package Calculator Australia | Stage EMI (IO vs P&I) — PropMarketHub',
+  title: 'House & Land Package Calculator Australia | Stage EMI (IO vs P&I)',
   description:
     'Model house and land package repayments across every construction stage. Choose Interest-Only or P&I for each phase, compare monthly EMI increases from land settlement to completion.',
   alternates: { canonical: PAGE_URL },

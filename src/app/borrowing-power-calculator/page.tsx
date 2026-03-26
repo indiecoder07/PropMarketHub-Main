@@ -4,7 +4,7 @@ import { BorrowingPowerCalculator } from '@/features/BorrowingPowerCalculator/Bo
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Borrowing Power Calculator Australia — How Much Can I Borrow? — PropMarketHub',
+  title: 'Borrowing Power Calculator Australia — How Much Can I Borrow?',
   description: 'Estimate how much an Australian lender may approve based on your income, expenses, debts, and the 3% serviceability buffer.',
   alternates: { canonical: 'https://propmarkethub.com.au/borrowing-power-calculator' },
   robots: { index: true, follow: true },

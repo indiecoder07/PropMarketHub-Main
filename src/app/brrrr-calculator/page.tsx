@@ -4,7 +4,7 @@ import { BRRRRCalculator } from '@/features/BRRRRCalculator/BRRRRCalculator';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'BRRRR Calculator Australia — Buy Renovate Rent Refinance Repeat — PropMarketHub',
+  title: 'BRRRR Calculator Australia — Buy Renovate Rent Refinance Repeat',
   description: 'Model the full BRRRR cycle: purchase, renovation, rental income, refinance equity, and capital left in the deal.',
   alternates: { canonical: 'https://propmarkethub.com.au/brrrr-calculator' },
   robots: { index: true, follow: true },

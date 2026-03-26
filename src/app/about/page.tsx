@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title:       'About PropMarketHub — Free Australian Property Investment Tools & Mission',
+  title:       'About PropMarketHub',
   description: 'PropMarketHub builds free, data-driven property investment tools for Australian investors — suburb scorecard, mortgage calculator, stamp duty estimator, and more. Start for free.',
   alternates:  { canonical: 'https://propmarkethub.com.au/about' },
   robots:      { index: true, follow: true },

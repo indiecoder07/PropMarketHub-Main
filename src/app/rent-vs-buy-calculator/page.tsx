@@ -4,7 +4,7 @@ import { RentVsBuyCalculator } from '@/features/RentVsBuyCalculator/RentVsBuyCal
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Rent vs Buy Calculator Australia — Is It Better to Rent or Buy? — PropMarketHub',
+  title: 'Rent vs Buy Calculator Australia — Is It Better to Rent or Buy?',
   description: 'Compare the true long-term cost of renting versus buying a home in Australia — including opportunity cost, capital growth, and all transaction costs.',
   alternates: { canonical: 'https://propmarkethub.com.au/rent-vs-buy-calculator' },
   robots: { index: true, follow: true },

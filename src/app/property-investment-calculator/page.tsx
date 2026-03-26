@@ -4,7 +4,7 @@ import { PropertyInvestmentCalculator } from '@/features/PropertyInvestmentCalcu
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Property Investment Calculator Australia — Total Return & ROI — PropMarketHub',
+  title: 'Property Investment Calculator Australia — Total Return & ROI',
   description: 'Calculate the total return on an Australian investment property — combining rental income, capital growth, tax benefits, and all holding costs over your investment horizon.',
   alternates: { canonical: 'https://propmarkethub.com.au/property-investment-calculator' },
   robots: { index: true, follow: true },

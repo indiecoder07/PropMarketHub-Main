@@ -4,7 +4,7 @@ import { PropertyPurchaseCostsCalculator } from '@/features/PropertyPurchaseCost
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Property Purchase Costs Calculator Australia — Stamp Duty, Legal & More — PropMarketHub',
+  title: 'Property Purchase Costs Calculator Australia — Stamp Duty, Legal & More',
   description: 'Calculate all upfront costs when buying property in Australia — stamp duty, conveyancing, building inspection, loan fees, and total cash required at settlement.',
   alternates: { canonical: 'https://propmarkethub.com.au/property-purchase-costs-calculator' },
   robots: { index: true, follow: true },

@@ -4,7 +4,7 @@ import { FirstHomeBuyerCalculator } from '@/features/FirstHomeBuyerCalculator/Fi
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'First Home Buyer Calculator Australia — Grants, Stamp Duty & Deposit — PropMarketHub',
+  title: 'First Home Buyer Calculator Australia — Grants, Stamp Duty & Deposit',
   description: 'Calculate your total upfront costs, First Home Owner Grant eligibility, stamp duty concessions, and how much deposit you need as a first home buyer in Australia.',
   alternates: { canonical: 'https://propmarkethub.com.au/first-home-buyer-calculator' },
   robots: { index: true, follow: true },

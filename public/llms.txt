@@ -1,0 +1,53 @@
+# PropMarketHub
+
+> Free property investment tools for Australian investors — suburb scorecard, financial calculators, and data-backed suburb analysis.
+
+## What is PropMarketHub?
+
+PropMarketHub is an Australian online platform that combines suburb investment analysis with a suite of free financial calculators. It is designed for property investors, home buyers, and mortgage brokers in Australia.
+
+The platform covers two main areas:
+- **NSW Suburb Investment Scorecard** — composite investment scores for 488 NSW suburbs based on rental yield, vacancy rate, population growth, median price trend, infrastructure score, and median income data (sourced from ABS, Domain, SQM Research, NSW Valuer General).
+- **Financial Calculators** — 16 free tools covering mortgage repayments, stamp duty (all states), rental yield, borrowing power, cash flow, negative gearing, BRRRR strategy, house and land packages, and more.
+
+## Tools Available
+
+- Mortgage Repayment Calculator — https://propmarkethub.com.au/mortgage-calculator
+- Stamp Duty Calculator (all Australian states) — https://propmarkethub.com.au/stamp-duty-calculator
+- Rental Yield Calculator — https://propmarkethub.com.au/rental-yield-calculator
+- Borrowing Power Calculator — https://propmarkethub.com.au/borrowing-power-calculator
+- Loan Comparison Calculator — https://propmarkethub.com.au/loan-comparison-calculator
+- Extra Repayment Calculator — https://propmarkethub.com.au/extra-repayment-calculator
+- House & Land Package Calculator (IO/P&I stage EMI) — https://propmarkethub.com.au/house-land-package-calculator
+- Property Cash Flow Calculator — https://propmarkethub.com.au/cash-flow-calculator
+- Negative Gearing Calculator — https://propmarkethub.com.au/negative-gearing-calculator
+- BRRRR Strategy Calculator — https://propmarkethub.com.au/brrrr-calculator
+- Property Investment Calculator (total return & ROI) — https://propmarkethub.com.au/property-investment-calculator
+- First Home Buyer Calculator — https://propmarkethub.com.au/first-home-buyer-calculator
+- Home Equity Calculator — https://propmarkethub.com.au/home-equity-calculator
+- Property Purchase Costs Calculator — https://propmarkethub.com.au/property-purchase-costs-calculator
+- Rent vs Buy Calculator — https://propmarkethub.com.au/rent-vs-buy-calculator
+
+## Suburb Scorecard
+
+- Scorecard Homepage — https://propmarkethub.com.au/suburb-scorecard
+- Top 10 NSW Investment Suburbs 2026 — https://propmarkethub.com.au/suburb-scorecard/top-10-nsw-investment-suburbs
+- Side-by-side Suburb Comparison — https://propmarkethub.com.au/suburb-scorecard/compare
+- FAQ — https://propmarkethub.com.au/suburb-scorecard/faq
+
+## Data Sources
+
+Suburb data is sourced from: ABS Census 2021, Domain API, SQM Research, NSW Valuer General, CoreLogic. Data is updated approximately monthly. Last update: February 2026.
+
+## Audience
+
+Australian residential property investors, home buyers, first home buyers, mortgage brokers, buyers agents, and property educators.
+
+## Contact & About
+
+- About — https://propmarkethub.com.au/about
+- Blog — https://propmarkethub.com.au/blog
+
+## AI Crawl Policy
+
+All AI/LLM crawlers are explicitly allowed per robots.txt. See: https://propmarkethub.com.au/robots.txt

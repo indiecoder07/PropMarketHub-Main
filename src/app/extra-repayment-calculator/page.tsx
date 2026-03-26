@@ -4,7 +4,7 @@ import { ExtraRepaymentCalculator } from '@/features/ExtraRepaymentCalculator/Ex
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Extra Repayment Calculator Australia — Pay Off Your Mortgage Faster — PropMarketHub',
+  title: 'Extra Repayment Calculator Australia — Pay Off Your Mortgage Faster',
   description: 'See how much interest you can save and how many years you can cut off your mortgage by making extra repayments each month.',
   alternates: { canonical: 'https://propmarkethub.com.au/extra-repayment-calculator' },
   robots: { index: true, follow: true },

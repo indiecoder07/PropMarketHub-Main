@@ -274,7 +274,7 @@
 
 /* ── Stage-change row highlight ───────────────────────────── */
 .stageRow td {
-  background: #fafafa;
+  background: var(--color-gray-50);
   font-weight: 600;
   color: var(--color-text-primary) !important;
 }
@@ -291,7 +291,7 @@
 }
 
 .tdIncrease {
-  color: #d97706 !important;
+  color: var(--color-warning) !important;
 }
 
 .tdRef {
@@ -346,8 +346,8 @@
 }
 
 .summaryCardGap {
-  background: #fffbeb;
-  border-color: #fbbf24;
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning-border);
 }
 
 .cardTitle {
@@ -434,6 +434,34 @@
 .assumptionsList {
   margin: var(--space-2) 0 0;
   padding-left: var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ── Empty / error states ─────────────────────────────────── */
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-gray-50);
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.emptyStateText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  max-width: 24rem;
+  margin: 0;
+}
+
+.emptyTableCell {
+  text-align: center;
+  padding: var(--space-6) !important;
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
 }

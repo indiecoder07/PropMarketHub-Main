@@ -4,7 +4,7 @@ import { HomeEquityCalculator } from '@/features/HomeEquityCalculator/HomeEquity
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Home Equity Calculator Australia — Usable Equity & LVR — PropMarketHub',
+  title: 'Home Equity Calculator Australia — Usable Equity & LVR',
   description: 'Calculate your available home equity and how much you could access to buy an investment property, renovate, or refinance.',
   alternates: { canonical: 'https://propmarkethub.com.au/home-equity-calculator' },
   robots: { index: true, follow: true },

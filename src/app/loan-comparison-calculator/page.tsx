@@ -4,7 +4,7 @@ import { LoanComparisonCalculator } from '@/features/LoanComparisonCalculator/Lo
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Loan Comparison Calculator Australia — Compare Home Loans — PropMarketHub',
+  title: 'Loan Comparison Calculator Australia — Compare Home Loans',
   description: 'Compare two Australian home loan scenarios side by side — rate, fees, and total cost — to find the cheaper deal over your full term.',
   alternates: { canonical: 'https://propmarkethub.com.au/loan-comparison-calculator' },
   robots: { index: true, follow: true },
