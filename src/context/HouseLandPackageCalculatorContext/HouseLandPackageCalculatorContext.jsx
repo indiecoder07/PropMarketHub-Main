@@ -7,6 +7,7 @@ import {
   DEFAULT_INPUTS,
   DEFAULT_STAGES,
   INPUT_LIMITS,
+  REPAYMENT_TYPES,
   STAGE_FIELD_KEYS,
   ZERO_VALUE,
 } from '@/constants';
@@ -49,6 +50,8 @@ export function HouseLandPackageCalculatorProvider({ children }) {
   const [annualRate, setAnnualRate] = useState(DEFAULT_INPUTS.annualRate);
   const [termYears, setTermYears] = useState(DEFAULT_INPUTS.termYears);
   const [constructionMonths, setConstructionMonths] = useState(DEFAULT_INPUTS.constructionMonths);
+  const [constructionType, setConstructionType] = useState(DEFAULT_INPUTS.constructionType);
+  const [postConstructionType, setPostConstructionType] = useState(DEFAULT_INPUTS.postConstructionType);
   const [stages, setStages] = useState(DEFAULT_STAGES);
 
   const value = useMemo(() => ({
@@ -59,6 +62,8 @@ export function HouseLandPackageCalculatorProvider({ children }) {
       annualRate,
       termYears,
       constructionMonths,
+      constructionType,
+      postConstructionType,
     },
     limits: INPUT_LIMITS,
     stages,
@@ -69,6 +74,12 @@ export function HouseLandPackageCalculatorProvider({ children }) {
       setAnnualRate,
       setTermYears,
       setConstructionMonths,
+      setConstructionType: (type) => setConstructionType(
+        type === REPAYMENT_TYPES.IO ? REPAYMENT_TYPES.IO : REPAYMENT_TYPES.PI
+      ),
+      setPostConstructionType: (type) => setPostConstructionType(
+        type === REPAYMENT_TYPES.IO ? REPAYMENT_TYPES.IO : REPAYMENT_TYPES.PI
+      ),
       setStageField: (stageId, key, value) => {
         setStages((prev) => prev.map((stage) => {
           if (stage.id !== stageId) return stage;
@@ -98,7 +109,7 @@ export function HouseLandPackageCalculatorProvider({ children }) {
         setStages(DEFAULT_STAGES);
       },
     },
-  }), [annualRate, buildPrice, constructionMonths, deposit, landPrice, stages, termYears]);
+  }), [annualRate, buildPrice, constructionMonths, constructionType, deposit, landPrice, postConstructionType, stages, termYears]);
 
   return (
     <HouseLandPackageCalculatorContext.Provider value={value}>

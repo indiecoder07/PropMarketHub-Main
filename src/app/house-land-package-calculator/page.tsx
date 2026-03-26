@@ -14,7 +14,7 @@ const PAGE_URL = `https://propmarkethub.com.au${HOUSE_LAND_CALCULATOR_ROUTE}`;
 export const metadata: Metadata = {
   title: 'House & Land Package Calculator Australia | Stage EMI (IO vs P&I) — PropMarketHub',
   description:
-    'Model house and land package repayments across every construction stage. Compare Interest-Only vs P&I monthly EMI increases from land settlement to completion.',
+    'Model house and land package repayments across every construction stage. Choose Interest-Only or P&I for each phase, compare monthly EMI increases from land settlement to completion.',
   alternates: { canonical: PAGE_URL },
   robots: { index: true, follow: true },
   openGraph: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     title: 'House & Land Package Calculator Australia | IO vs P&I Stage Repayments',
     description:
-      'Track monthly repayment changes at each progress drawdown. Compare Interest-Only and Principal & Interest across full timeline.',
+      'Track monthly repayment changes at each progress drawdown. Choose your repayment structure for construction and post-completion phases.',
     images: [
       {
         url: 'https://propmarkethub.com.au/og-image.png',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     site: '@propmarkethub',
     title: 'House & Land Package Calculator Australia | IO vs P&I Stage Repayments',
     description:
-      'Compare staged EMI growth from land settlement to completion with side-by-side IO and P&I tracks.',
+      'Compare staged EMI growth from land settlement to completion with IO and P&I options for each phase.',
     images: ['https://propmarkethub.com.au/og-image.png'],
   },
   keywords: [
@@ -59,13 +59,13 @@ const schema = {
       name: 'House & Land Package Calculator',
       url: PAGE_URL,
       description:
-        'Australian calculator to track staged repayment increases for house and land packages with Interest-Only and P&I comparison.',
+        'Australian calculator to track staged repayment increases for house and land packages. Choose Interest-Only or P&I for construction and post-completion phases.',
       applicationCategory: 'FinanceApplication',
       operatingSystem: 'Web',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
       author: { '@type': 'Organization', name: 'PropMarketHub', url: 'https://propmarkethub.com.au' },
       featureList:
-        'Stage-by-stage drawdown timeline, Monthly IO vs P&I repayments, EMI increase tracking, Construction-phase comparison',
+        'Stage-by-stage drawdown timeline, IO or P&I per phase, Monthly repayment tracking, Construction-phase comparison',
     },
     {
       '@type': 'FAQPage',
@@ -89,13 +89,18 @@ const schema = {
         },
         {
           '@type': 'HowToStep',
+          name: 'Choose your repayment structure per phase',
+          text: 'Select IO or P&I for the construction period and for the full loan tenure after completion.',
+        },
+        {
+          '@type': 'HowToStep',
           name: 'Map construction stages by month and percentage',
           text: 'Set stage timing and draw percentages to match your lender and builder schedule.',
         },
         {
           '@type': 'HowToStep',
-          name: 'Compare monthly IO and P&I tracks',
-          text: 'Use the timeline to see repayment jumps and cash-flow impact at each stage.',
+          name: 'Review your EMI timeline',
+          text: 'See repayment jumps at each drawdown — stage changes only, or expand to the full tenure.',
         },
       ],
     },
@@ -114,77 +119,84 @@ export default function HouseLandPackageCalculatorPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      <main className={styles.page}>
-        <div className={styles.container}>
-          <section className={styles.hero}>
-            <p className={styles.eyebrow}>Australian Construction Loan Planning</p>
+      <div className={styles.page}>
+
+        {/* ── Hero ── */}
+        <section className={styles.hero}>
+          <div className={`container ${styles.heroInner}`}>
+            <p className={styles.eyebrow}>Free · Australian Construction Loan Planning</p>
             <h1 className={styles.h1}>House &amp; Land Package Stage EMI Calculator</h1>
             <p className={styles.subtitle}>
-              See exactly how monthly repayments increase after each land and construction drawdown.
-              Compare Interest-Only and P&amp;I side-by-side across the full timeline.
+              See exactly how monthly repayments increase after each drawdown. Choose
+              Interest-Only or P&amp;I independently for the construction phase and for
+              the full tenure after completion.
             </p>
-          </section>
+          </div>
+        </section>
 
-          <section className={styles.directAnswer}>
-            <h2 className={styles.directAnswerTitle}>Direct answer</h2>
-            <p className={styles.directAnswerText}>
-              For most house and land builds, monthly repayments rise in steps as each progress payment
-              is released. Interest-Only starts lower but can cost more over time. P&amp;I is usually
-              higher during construction but starts principal reduction earlier.
-            </p>
-          </section>
-
-          <section className={styles.section}>
+        {/* ── Calculator ── */}
+        <section className={styles.calcSection}>
+          <div className="container">
             <FeatureErrorBoundary>
               <HouseLandPackageCalculatorProvider>
                 <HouseLandPackageCalculator />
               </HouseLandPackageCalculatorProvider>
             </FeatureErrorBoundary>
-          </section>
+          </div>
+        </section>
 
-          <section className={styles.section}>
-            <h2 className={styles.sectionHeading}>How stage repayments increase</h2>
-            <p className={styles.sectionText}>
-              Construction loans are typically drawn in stages. Each draw increases the funded balance,
-              which increases monthly repayments. This tool models every month so you can forecast
-              repayment pressure before signing contracts.
+        {/* ── How it works ── */}
+        <section className={styles.introSection}>
+          <div className={`container ${styles.introInner}`}>
+            <h2 className={styles.introHeading}>How construction loan repayments work</h2>
+            <p className={styles.introText}>
+              Construction loans are drawn in stages — each progress payment increases your funded balance,
+              which immediately increases monthly interest costs. This calculator models every drawdown
+              so you can forecast repayment pressure before signing contracts.
             </p>
 
-            <div className={styles.steps}>
+            <div className={styles.stepsGrid}>
               <article className={styles.stepCard}>
-                <h3 className={styles.stepTitle}>1. Land settlement draw</h3>
+                <span className={styles.stepNum}>1</span>
+                <h3 className={styles.stepTitle}>Land settlement draw</h3>
                 <p className={styles.stepText}>
-                  The first draw usually happens at land settlement. This sets your baseline repayment.
+                  The first draw at land settlement sets your baseline repayment on the land portion of your loan.
                 </p>
               </article>
               <article className={styles.stepCard}>
-                <h3 className={styles.stepTitle}>2. Construction stage draws</h3>
+                <span className={styles.stepNum}>2</span>
+                <h3 className={styles.stepTitle}>Progress payment stages</h3>
                 <p className={styles.stepText}>
-                  Slab, frame, lock-up, fixing, and completion draws increase funded balance in steps.
+                  Slab, frame, lock-up, fixing, and practical completion draws each increase the funded balance in steps.
                 </p>
               </article>
               <article className={styles.stepCard}>
-                <h3 className={styles.stepTitle}>3. Compare IO and P&amp;I cash flow</h3>
+                <span className={styles.stepNum}>3</span>
+                <h3 className={styles.stepTitle}>IO vs P&amp;I during build</h3>
                 <p className={styles.stepText}>
-                  View both tracks monthly to understand short-term affordability and long-term cost.
+                  Interest-Only keeps repayments lower during construction. P&amp;I starts paying principal immediately — higher short-term, lower long-term cost.
                 </p>
               </article>
               <article className={styles.stepCard}>
-                <h3 className={styles.stepTitle}>4. Plan buffers before completion</h3>
+                <span className={styles.stepNum}>4</span>
+                <h3 className={styles.stepTitle}>Plan buffers before completion</h3>
                 <p className={styles.stepText}>
-                  Use the final repayment level to plan liquidity, rental coverage, and refinance options.
+                  Use the final repayment figure to plan cash flow, rental coverage, and refinance timing before practical completion.
                 </p>
               </article>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className={styles.section}>
-            <h2 className={styles.sectionHeading}>Worked example (illustrative)</h2>
-            <p className={styles.sectionText}>
-              A buyer funds a $420,000 land contract and $380,000 build with a $160,000 deposit at 6.2%.
+        {/* ── Worked example ── */}
+        <section className={styles.exampleSection}>
+          <div className={`container ${styles.exampleInner}`}>
+            <h2 className={styles.exampleHeading}>Worked example (illustrative)</h2>
+            <p className={styles.exampleIntro}>
+              A buyer funds a $420,000 land contract and $380,000 build with a $160,000 deposit at 6.2% p.a.
               Drawdowns occur across 9 months. The timeline reveals each repayment jump as construction advances.
             </p>
-            <div className={styles.exampleGrid}>
+            <div className={styles.exampleCard}>
               <div className={styles.exampleRow}>
                 <span className={styles.exampleLabel}>Total project cost</span>
                 <span className={styles.exampleValue}>$800,000</span>
@@ -198,31 +210,38 @@ export default function HouseLandPackageCalculatorPage() {
                 <span className={styles.exampleValue}>9 months</span>
               </div>
               <div className={styles.exampleRow}>
-                <span className={styles.exampleLabel}>Outcome</span>
-                <span className={styles.exampleValue}>EMI rises progressively as each stage is funded</span>
+                <span className={styles.exampleLabel}>Settlement IO repayment</span>
+                <span className={styles.exampleValue}>~$2,177/mo</span>
+              </div>
+              <div className={[styles.exampleRow, styles.exampleRowLast].join(' ')}>
+                <span className={styles.exampleLabel}>Final P&amp;I repayment (post-completion)</span>
+                <span className={styles.exampleValue}>~$3,908/mo</span>
               </div>
             </div>
-
             <div className={styles.linkRow}>
-              <Link href="/mortgage-calculator" className={styles.inlineLink}>Mortgage Calculator</Link>
-              <Link href="/cash-flow-calculator" className={styles.inlineLink}>Cash Flow Calculator</Link>
-              <Link href="/stamp-duty-calculator" className={styles.inlineLink}>Stamp Duty Calculator</Link>
+              <Link href="/mortgage-calculator" className={styles.inlineLink}>Mortgage Calculator →</Link>
+              <Link href="/cash-flow-calculator" className={styles.inlineLink}>Cash Flow Calculator →</Link>
+              <Link href="/stamp-duty-calculator" className={styles.inlineLink}>Stamp Duty Calculator →</Link>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className={styles.section}>
-            <h2 className={styles.sectionHeading}>House &amp; land package FAQs</h2>
+        {/* ── FAQ ── */}
+        <section className={styles.faqSection}>
+          <div className={`container ${styles.faqInner}`}>
+            <h2 className={styles.faqHeading}>House &amp; land package FAQs</h2>
             <div className={styles.faqList}>
               {FAQ_ITEMS.map((faq) => (
                 <article key={faq.q} className={styles.faqItem}>
-                  <h3 className={styles.faqQuestion}>{faq.q}</h3>
-                  <p className={styles.faqAnswer}>{faq.a}</p>
+                  <h3 className={styles.faqQ}>{faq.q}</h3>
+                  <p className={styles.faqA}>{faq.a}</p>
                 </article>
               ))}
             </div>
-          </section>
-        </div>
-      </main>
+          </div>
+        </section>
+
+      </div>
     </>
   );
 }

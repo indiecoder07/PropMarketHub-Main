@@ -3,6 +3,7 @@ import {
   DEFAULT_STAGES,
   MONTHS_PER_YEAR,
   PERCENT_DIVISOR,
+  REPAYMENT_TYPES,
   SUMMARY_CARD_KEYS,
   VALIDATION_MESSAGES,
   ZERO_VALUE,
@@ -120,6 +121,9 @@ export function calculateHouseLandPackageScenario(rawInput = {}) {
   const loanRequired = Math.max(ZERO_VALUE, totalProjectCost - deposit);
   const fundingRatio = totalProjectCost > ZERO_VALUE ? loanRequired / totalProjectCost : ZERO_VALUE;
 
+  const constructionType = inputs.constructionType || REPAYMENT_TYPES.IO;
+  const postConstructionType = inputs.postConstructionType || REPAYMENT_TYPES.PI;
+
   const financedLandDraw = roundCurrency(landPrice * fundingRatio);
   const financedBuildTotal = roundCurrency(buildPrice * fundingRatio);
   const monthlyRate = annualRate / PERCENT_DIVISOR / MONTHS_PER_YEAR;
@@ -145,6 +149,7 @@ export function calculateHouseLandPackageScenario(rawInput = {}) {
   let drawnBalance = ZERO_VALUE;
   let previousIo = ZERO_VALUE;
   let previousPi = ZERO_VALUE;
+  let previousSelected = ZERO_VALUE;
   let constructionIoInterestTotal = ZERO_VALUE;
   let constructionPiInterestTotal = ZERO_VALUE;
   let cumulativeRepaymentGap = ZERO_VALUE;
@@ -159,15 +164,20 @@ export function calculateHouseLandPackageScenario(rawInput = {}) {
       monthEvent = events.map((event) => event.name).join(' + ');
     }
 
+    const inConstruction = month <= constructionMonths;
     const remainingMonths = Math.max(ONE_VALUE, totalMonths - month);
     const ioRepayment = roundCurrency(drawnBalance * monthlyRate);
     const piRepayment = roundCurrency(calculateAmortizedRepayment(drawnBalance, monthlyRate, remainingMonths));
     const ioIncrease = roundCurrency(ioRepayment - previousIo);
     const piIncrease = roundCurrency(piRepayment - previousPi);
 
+    const activeType = inConstruction ? constructionType : postConstructionType;
+    const selectedRepayment = activeType === REPAYMENT_TYPES.IO ? ioRepayment : piRepayment;
+    const selectedIncrease = roundCurrency(selectedRepayment - previousSelected);
+
     const piMonthInterest = roundCurrency(drawnBalance * monthlyRate);
 
-    if (month <= constructionMonths) {
+    if (inConstruction) {
       constructionIoInterestTotal = roundCurrency(constructionIoInterestTotal + ioRepayment);
       constructionPiInterestTotal = roundCurrency(constructionPiInterestTotal + piMonthInterest);
     }
@@ -182,11 +192,15 @@ export function calculateHouseLandPackageScenario(rawInput = {}) {
       ioIncrease,
       piRepayment,
       piIncrease,
-      inConstruction: month <= constructionMonths,
+      selectedRepayment,
+      selectedIncrease,
+      inConstruction,
+      isStageChange: events.length > ZERO_VALUE || month === totalMonths,
     });
 
     previousIo = ioRepayment;
     previousPi = piRepayment;
+    previousSelected = selectedRepayment;
   }
 
   const currentIndex = Math.min(constructionMonths, timelineRows.length - ONE_VALUE);

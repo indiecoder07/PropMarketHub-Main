@@ -8,6 +8,11 @@ export const MONTHS_PER_YEAR = 12;
 export const ZERO_VALUE = 0;
 export const ONE_VALUE = 1;
 
+export const REPAYMENT_TYPES = {
+  IO: 'io',
+  PI: 'pi',
+};
+
 export const DEFAULT_INPUTS = {
   landPrice: 420000,
   buildPrice: 380000,
@@ -15,6 +20,8 @@ export const DEFAULT_INPUTS = {
   annualRate: 6.2,
   termYears: 30,
   constructionMonths: 9,
+  constructionType: 'io',
+  postConstructionType: 'pi',
 };
 
 export const INPUT_LIMITS = {
@@ -74,10 +81,10 @@ export const REPAYMENT_TABLE_COLUMNS = {
   month: 'Month',
   event: 'Stage event',
   drawnBalance: 'Loan drawn',
-  ioRepayment: 'IO repayment',
-  ioIncrease: 'IO increase',
-  piRepayment: 'P&I repayment',
-  piIncrease: 'P&I increase',
+  yourRepayment: 'Your repayment',
+  yourChange: 'Change',
+  ioRepayment: 'IO',
+  piRepayment: 'P&I',
 };
 
 export const BREAKPOINT_TOKENS = {

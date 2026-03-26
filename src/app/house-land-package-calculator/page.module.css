@@ -1,122 +1,169 @@
+/* ── Base ─────────────────────────────────────────────────── */
 .page {
-  padding: var(--space-12) 0 var(--space-16);
   background: var(--color-background);
 }
 
-.container {
-  width: var(--size-full);
-  max-width: var(--container-xl);
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-10);
-}
-
+/* ── Hero ─────────────────────────────────────────────────── */
 .hero {
   background: var(--gradient-hero);
-  border: var(--border-width-1) solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-8);
+  padding: var(--space-12) 0 var(--space-10);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroInner {
+  max-width: var(--container-lg);
 }
 
 .eyebrow {
-  margin: 0;
-  color: var(--color-primary);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
 }
 
 .h1 {
-  margin: var(--space-3) 0 0;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
   color: var(--color-text-primary);
-  font-size: var(--font-size-4xl);
-  line-height: var(--line-height-tight);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
 }
 
 .subtitle {
-  margin: var(--space-3) 0 0;
-  color: var(--color-text-secondary);
   font-size: var(--font-size-lg);
-  line-height: var(--line-height-relaxed);
-  max-width: var(--content-max-width-lg);
-}
-
-.directAnswer {
-  border: var(--border-width-1) solid var(--color-primary-light);
-  border-radius: var(--radius-lg);
-  background: var(--color-white);
-  padding: var(--space-6);
-}
-
-.directAnswerTitle {
-  margin: 0;
-  font-size: var(--font-size-xl);
-  color: var(--color-primary);
-}
-
-.directAnswerText {
-  margin: var(--space-3) 0 0;
   color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
+  line-height: 1.6;
+  max-width: 620px;
 }
 
-.section {
-  background: var(--color-white);
-  border: var(--border-width-1) solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
+/* ── Calculator section ───────────────────────────────────── */
+.calcSection {
+  padding: var(--space-10) 0;
 }
 
-.sectionHeading {
-  margin: 0;
-  color: var(--color-text-primary);
+/* ── How it works / intro ─────────────────────────────────── */
+.introSection {
+  padding: var(--space-12) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.introInner {
+  max-width: var(--container-lg);
+}
+
+.introHeading {
   font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
 }
 
-.sectionText {
-  margin: var(--space-3) 0 0;
+.introText {
+  font-size: var(--font-size-base);
+  line-height: 1.7;
   color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-8);
+  max-width: 680px;
 }
 
-.steps {
-  margin: var(--space-6) 0 0;
+.stepsGrid {
   display: grid;
   gap: var(--space-4);
 }
 
 .stepCard {
-  border: var(--border-width-1) solid var(--color-border);
-  border-radius: var(--radius-base);
-  background: var(--color-gray-50);
-  padding: var(--space-4);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  flex-shrink: 0;
+  align-self: flex-start;
 }
 
 .stepTitle {
   margin: 0;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
+  font-weight: 700;
   color: var(--color-text-primary);
 }
 
 .stepText {
-  margin: var(--space-2) 0 0;
+  margin: 0;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  line-height: var(--line-height-base);
+  line-height: 1.6;
 }
 
-.exampleGrid {
-  margin: var(--space-6) 0 0;
-  display: grid;
-  gap: var(--space-3);
+/* ── Worked example ───────────────────────────────────────── */
+.exampleSection {
+  padding: var(--space-12) 0;
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.exampleInner {
+  max-width: var(--container-lg);
+}
+
+.exampleHeading {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.exampleIntro {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: var(--space-6);
+}
+
+.exampleCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
 }
 
 .exampleRow {
-  display: grid;
-  grid-template-columns: minmax(var(--size-zero), var(--size-full));
-  gap: var(--space-1);
-  border-bottom: var(--border-width-1) solid var(--color-border);
-  padding-bottom: var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-4);
+}
+
+.exampleRowLast {
+  border-bottom: none;
+}
+
+.exampleRow:nth-child(even) {
+  background: var(--color-surface);
 }
 
 .exampleLabel {
@@ -125,64 +172,77 @@
 }
 
 .exampleValue {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
+  font-weight: 700;
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-semibold);
+  text-align: right;
 }
 
 .linkRow {
-  margin-top: var(--space-6);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .inlineLink {
   color: var(--color-primary);
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
   text-decoration: none;
 }
 
 .inlineLink:hover {
+  color: var(--color-primary-hover);
   text-decoration: underline;
 }
 
+/* ── FAQ ──────────────────────────────────────────────────── */
+.faqSection {
+  padding: var(--space-12) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.faqInner {
+  max-width: var(--container-lg);
+}
+
+.faqHeading {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-8);
+}
+
 .faqList {
-  margin-top: var(--space-5);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-4);
 }
 
 .faqItem {
-  border: var(--border-width-1) solid var(--color-border);
-  border-radius: var(--radius-base);
-  padding: var(--space-4);
-  background: var(--color-gray-50);
+  padding: var(--space-6);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
-.faqQuestion {
-  margin: 0;
-  font-size: var(--font-size-lg);
+.faqQ {
+  font-size: var(--font-size-base);
+  font-weight: 700;
   color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
 }
 
-.faqAnswer {
-  margin: var(--space-2) 0 0;
+.faqA {
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  line-height: var(--line-height-base);
+  line-height: 1.7;
 }
 
-@media (min-width: 48rem) {
-  .container {
-    padding: 0 var(--space-6);
-  }
-
-  .exampleRow {
-    grid-template-columns: minmax(var(--size-zero), var(--size-half)) minmax(var(--size-zero), var(--size-half));
-    align-items: center;
-  }
-
-  .steps {
-    grid-template-columns: repeat(var(--grid-cols-2), minmax(var(--size-zero), var(--size-full)));
+/* ── Responsive ───────────────────────────────────────────── */
+@media (min-width: 40rem) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

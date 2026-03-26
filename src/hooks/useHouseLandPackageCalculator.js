@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   CURRENCY_CODE,
   CURRENCY_LOCALE,
@@ -31,6 +31,7 @@ function formatDelta(value) {
 
 export function useHouseLandPackageCalculator() {
   const { fields, stages, actions, limits } = useHouseLandPackageCalculatorContext();
+  const [showFullTimeline, setShowFullTimeline] = useState(false);
 
   const result = useMemo(() => calculateHouseLandPackageScenario({
     landPrice: fields.landPrice.raw,
@@ -39,18 +40,35 @@ export function useHouseLandPackageCalculator() {
     annualRate: fields.annualRate,
     termYears: fields.termYears,
     constructionMonths: fields.constructionMonths,
+    constructionType: fields.constructionType,
+    postConstructionType: fields.postConstructionType,
     stages,
-  }), [fields.annualRate, fields.buildPrice.raw, fields.constructionMonths, fields.deposit.raw, fields.landPrice.raw, fields.termYears, stages]);
+  }), [
+    fields.annualRate,
+    fields.buildPrice.raw,
+    fields.constructionMonths,
+    fields.constructionType,
+    fields.deposit.raw,
+    fields.landPrice.raw,
+    fields.postConstructionType,
+    fields.termYears,
+    stages,
+  ]);
 
   const formattedTimeline = useMemo(() => result.timelineRows.map((row) => ({
     ...row,
     monthLabel: row.month === 0 ? 'Settlement' : `Month ${row.month}`,
     drawnBalanceFormatted: CURRENCY_FORMAT.format(row.drawnBalance),
+    yourRepaymentFormatted: CURRENCY_PRECISE.format(row.selectedRepayment),
+    yourChangeFormatted: formatDelta(row.selectedIncrease),
     ioRepaymentFormatted: CURRENCY_PRECISE.format(row.ioRepayment),
     piRepaymentFormatted: CURRENCY_PRECISE.format(row.piRepayment),
-    ioIncreaseFormatted: formatDelta(row.ioIncrease),
-    piIncreaseFormatted: formatDelta(row.piIncrease),
   })), [result.timelineRows]);
+
+  const displayedTimeline = useMemo(() => {
+    if (showFullTimeline) return formattedTimeline;
+    return formattedTimeline.filter((row) => row.isStageChange);
+  }, [formattedTimeline, showFullTimeline]);
 
   const summary = useMemo(() => ({
     ioCurrent: CURRENCY_PRECISE.format(result.summaryCards[SUMMARY_CARD_KEYS.ioCurrent] || 0),
@@ -69,8 +87,10 @@ export function useHouseLandPackageCalculator() {
     limits,
     errors: result.errors,
     summary,
-    assumptions: result.assumptions,
-    timelineRows: formattedTimeline,
+    timelineRows: displayedTimeline,
+    totalTimelineRows: formattedTimeline.length,
+    showFullTimeline,
+    toggleTimeline: () => setShowFullTimeline((v) => !v),
     tableColumns: REPAYMENT_TABLE_COLUMNS,
   };
 }
