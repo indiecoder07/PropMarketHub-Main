@@ -15,10 +15,11 @@ const NAV = [
     label: 'Finance',
     key: 'finance',
     children: [
-      { label: 'Mortgage Calculator',        href: '/mortgage-calculator'        },
-      { label: 'Loan Comparison Calculator', href: '/loan-comparison-calculator' },
-      { label: 'Borrowing Power Calculator', href: '/borrowing-power-calculator' },
-      { label: 'Extra Repayment Calculator', href: '/extra-repayment-calculator' },
+      { label: 'Mortgage Calculator',              href: '/mortgage-calculator'              },
+      { label: 'Loan Comparison Calculator',       href: '/loan-comparison-calculator'       },
+      { label: 'Borrowing Power Calculator',       href: '/borrowing-power-calculator'       },
+      { label: 'Extra Repayment Calculator',       href: '/extra-repayment-calculator'       },
+      { label: 'House & Land Package Calculator',  href: '/house-land-package-calculator'    },
     ],
   },
   {
