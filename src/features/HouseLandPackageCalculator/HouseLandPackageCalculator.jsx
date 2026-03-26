@@ -35,7 +35,6 @@ export function HouseLandPackageCalculator({ className = '' }) {
     actions,
     errors,
     summary,
-    assumptions,
     timelineRows,
     tableColumns,
   } = useHouseLandPackageCalculator();
