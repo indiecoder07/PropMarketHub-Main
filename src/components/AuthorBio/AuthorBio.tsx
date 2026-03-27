@@ -15,8 +15,8 @@ export function AuthorBio({ author }: AuthorBioProps) {
           <Image
             src={author.image}
             alt={author.name}
-            width={56}
-            height={56}
+            width={64}
+            height={64}
             className={styles.avatarImg}
           />
         ) : (
@@ -26,13 +26,26 @@ export function AuthorBio({ author }: AuthorBioProps) {
         )}
       </div>
       <div className={styles.content}>
+        <p className={styles.label}>Written by</p>
         <p className={styles.name}>
           <Link href={author.url} className={styles.nameLink}>
             {author.name}
           </Link>
         </p>
-        <p className={styles.role}>{author.role}</p>
-        <p className={styles.bio}>{author.bio}</p>
+        <p className={styles.role}>
+          {author.role}
+          {author.affiliation && ` · ${author.affiliation}`}
+        </p>
+        {/* Use shortBio for compact card context; falls back to first sentence of full bio */}
+        <p className={styles.bio}>
+          {author.shortBio ?? author.bio.split('\n\n')[0]}
+        </p>
+        {/* Deep link to full author page if it's a named person */}
+        {author.url !== 'https://propmarkethub.com.au/about' && (
+          <Link href={author.url} className={styles.viewProfile}>
+            View full profile →
+          </Link>
+        )}
       </div>
     </div>
   );
