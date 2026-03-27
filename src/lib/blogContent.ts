@@ -10,32 +10,71 @@ export interface Heading {
   level: number;
 }
 
+// YAML-like frontmatter key names — used to detect bare frontmatter paragraphs
+const FRONTMATTER_KEYS =
+  'title|date|category|geography|tags|readTime|read_time|author|slug|excerpt|description|published|image|cover_image';
+
+const FRONTMATTER_KEY_RE = new RegExp(
+  `^(?:${FRONTMATTER_KEYS})\\s*:`,
+  'i'
+);
+
 /**
  * Sanitize blog post HTML content:
  * - Strips raw YAML frontmatter (--- ... ---) at top
  * - Strips TipTap-encoded frontmatter (<p>---</p> paragraph blocks)
+ * - Strips bare frontmatter paragraphs: <p>title: "..." date: ... tags: [...]</p>
+ *   (frontmatter where --- markers were stripped before DB storage)
+ * - Strips consecutive leading <p> tags that are each a single frontmatter key:value
  * - Strips duplicate leading <h1> tags (post title already rendered in page header)
  * - Strips visible "SEO Tags:" blocks at end of content
  */
 export function sanitizePostContent(html: string): string {
   if (!html) return html;
-  let content = html;
+  let content = html.trim();
 
   // 1. Strip raw YAML frontmatter block at top (--- ... ---)
   content = content.replace(/^\s*---[\s\S]*?---\s*/m, '');
 
-  // 2. Strip TipTap-encoded frontmatter: consecutive <p>---</p> lines wrapping key: value paragraphs
+  // 2. Strip TipTap-encoded frontmatter wrapped in <p>---</p> markers
   content = content.replace(/<p>\s*-{3}\s*<\/p>[\s\S]*?<p>\s*-{3}\s*<\/p>\s*/i, '');
 
-  // 3. Strip leading duplicate <h1> — post title is already shown in the page layout
+  // 3a. Strip a single leading <p> whose TEXT content starts with a frontmatter key.
+  //     Handles the case where all key:value pairs were collapsed into one paragraph,
+  //     e.g. <p>title: "..." date: 2026-03-05 category: Investment Tips tags: [...]</p>
+  content = content.replace(
+    /^\s*<p>([^<]*)<\/p>/i,
+    (match, innerText) => {
+      const stripped = innerText.replace(/&quot;/g, '"').replace(/&#\d+;/g, '').trim();
+      return FRONTMATTER_KEY_RE.test(stripped) ? '' : match;
+    }
+  );
+
+  // 3b. Strip one or more consecutive leading <p> tags that each look like a single
+  //     frontmatter key:value pair (one key per paragraph, TipTap line-per-paragraph).
+  //     Repeat until no more leading frontmatter paragraphs remain.
+  let prev = '';
+  while (prev !== content) {
+    prev = content;
+    content = content.replace(
+      /^\s*<p>([^<]*)<\/p>/i,
+      (match, innerText) => {
+        const stripped = innerText.replace(/&quot;/g, '"').replace(/&#\d+;/g, '').trim();
+        return FRONTMATTER_KEY_RE.test(stripped) ? '' : match;
+      }
+    );
+    content = content.trim();
+  }
+
+  // 4. Strip leading duplicate <h1> — post title already shown in the page layout
   content = content.replace(/^\s*<h1[^>]*>[\s\S]*?<\/h1>\s*/i, '');
 
-  // 4. Strip visible "SEO Tags:" blocks (various patterns)
+  // 5. Strip visible "SEO Tags:" blocks (various patterns)
   // Pattern A: <p>SEO Tags: ...</p> inline paragraph
   content = content.replace(/<p>\s*SEO\s+[Tt]ags?\s*:[\s\S]*?<\/p>/gi, '');
   // Pattern B: <h2>SEO Tags</h2> followed by remaining content (at end of post)
   content = content.replace(/<h[1-6][^>]*>\s*SEO\s+[Tt]ags?\s*<\/h[1-6]>[\s\S]*/gi, '');
-  // Pattern C: plain-text "SEO Tags:" lines (if content leaked as text)
+  // Pattern C: plain-text "SEO Tags:" lines
   content = content.replace(/\n?SEO\s+[Tt]ags?\s*:[^\n]*$/gim, '');
 
   return content.trim();
