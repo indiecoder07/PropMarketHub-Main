@@ -16,9 +16,15 @@ export function BlogCard({ post }) {
       )}
 
       <div className={styles.body}>
-        {post.tags && post.tags.length > 0 && (
+        {/* Category pill + tags */}
+        {(post.category || (post.tags && post.tags.length > 0)) && (
           <div className={styles.tags}>
-            {post.tags.slice(0, 3).map((tag) => (
+            {post.category && (
+              <span className={`${styles.tag} ${styles.tagCategory}`}>
+                {post.category}
+              </span>
+            )}
+            {post.tags && post.tags.slice(0, 2).map((tag) => (
               <span key={tag} className={styles.tag}>
                 {tag}
               </span>
@@ -35,7 +41,17 @@ export function BlogCard({ post }) {
         <p className={styles.excerpt}>{post.excerpt}</p>
 
         <div className={styles.footer}>
-          <span className={styles.date}>{formatDate(post.created_at)}</span>
+          <div className={styles.meta}>
+            <span className={styles.author}>{post.author || 'PropMarketHub'}</span>
+            <span className={styles.metaDot} aria-hidden="true">·</span>
+            <time className={styles.date}>{formatDate(post.created_at)}</time>
+            {post.read_time && (
+              <>
+                <span className={styles.metaDot} aria-hidden="true">·</span>
+                <span className={styles.readTime}>{post.read_time}</span>
+              </>
+            )}
+          </div>
           <Link href={`/blog/${post.slug}`} className={styles.readMore}>
             Read more →
           </Link>

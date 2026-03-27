@@ -133,3 +133,19 @@
   padding: var(--space-12);
   color: var(--color-text-muted);
 }
+
+.textareaCode {
+  composes: input;
+  min-height: 140px;
+  resize: vertical;
+  font-family: 'Menlo', 'Consolas', 'Monaco', monospace;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  background: var(--color-gray-50);
+}
+
+.hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}

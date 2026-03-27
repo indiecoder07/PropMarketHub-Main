@@ -1,0 +1,1 @@
+export { BlogFAQ } from './BlogFAQ';

@@ -51,11 +51,29 @@
 .meta {
   display: flex;
   gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-6);
   border-bottom: 1px solid var(--color-border);
+}
+
+.authorLink {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.authorLink:hover {
+  text-decoration: underline;
+}
+
+.tagCategory {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
 .coverWrapper {

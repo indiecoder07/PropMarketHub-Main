@@ -16,9 +16,15 @@ export interface Post {
   tags: string[];
   meta_title: string | null;
   meta_description: string | null;
+  /** Content category for filtering on the blog index (e.g. "Suburbs", "Finance", "Investing") */
+  category: string | null;
+  /** Human-readable read time shown in post byline (e.g. "5 min read") */
+  read_time: string | null;
+  /** FAQ items stored as JSONB array: [{ question: string, answer: string }] */
+  faqs: { question: string; answer: string }[] | null;
 }
 
-// Initialize blog_posts table
+// Initialize blog_posts table + add new columns if they don't exist (idempotent)
 export async function initDB() {
   await sql`
     CREATE TABLE IF NOT EXISTS blog_posts (
@@ -37,6 +43,11 @@ export async function initDB() {
       meta_description TEXT
     )
   `;
+
+  // Idempotent migrations — safe to run on every cold start
+  await sql`ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS category TEXT`;
+  await sql`ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS read_time TEXT`;
+  await sql`ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS faqs JSONB`;
 }
 
 export async function getAllPosts(publishedOnly = true): Promise<Post[]> {
@@ -69,9 +80,16 @@ export async function createPost(data: {
   tags?: string[];
   meta_title?: string;
   meta_description?: string;
+  category?: string;
+  read_time?: string;
+  faqs?: { question: string; answer: string }[];
 }): Promise<Post> {
   const rows = await sql`
-    INSERT INTO blog_posts (title, slug, excerpt, content, cover_image, published, author, tags, meta_title, meta_description)
+    INSERT INTO blog_posts (
+      title, slug, excerpt, content, cover_image, published,
+      author, tags, meta_title, meta_description,
+      category, read_time, faqs
+    )
     VALUES (
       ${data.title},
       ${data.slug},
@@ -82,7 +100,10 @@ export async function createPost(data: {
       ${data.author || 'PropMarketHub'},
       ${data.tags || []},
       ${data.meta_title || null},
-      ${data.meta_description || null}
+      ${data.meta_description || null},
+      ${data.category || null},
+      ${data.read_time || null},
+      ${data.faqs ? JSON.stringify(data.faqs) : null}
     )
     RETURNING *
   `;
@@ -92,17 +113,20 @@ export async function createPost(data: {
 export async function updatePost(id: string, data: Partial<Omit<Post, 'id' | 'created_at'>>): Promise<Post> {
   const rows = await sql`
     UPDATE blog_posts SET
-      title = COALESCE(${data.title ?? null}, title),
-      slug = COALESCE(${data.slug ?? null}, slug),
-      excerpt = COALESCE(${data.excerpt ?? null}, excerpt),
-      content = COALESCE(${data.content ?? null}, content),
-      cover_image = COALESCE(${data.cover_image ?? null}, cover_image),
-      published = COALESCE(${data.published ?? null}, published),
-      author = COALESCE(${data.author ?? null}, author),
-      tags = COALESCE(${data.tags ?? null}, tags),
-      meta_title = COALESCE(${data.meta_title ?? null}, meta_title),
+      title            = COALESCE(${data.title            ?? null}, title),
+      slug             = COALESCE(${data.slug             ?? null}, slug),
+      excerpt          = COALESCE(${data.excerpt          ?? null}, excerpt),
+      content          = COALESCE(${data.content          ?? null}, content),
+      cover_image      = COALESCE(${data.cover_image      ?? null}, cover_image),
+      published        = COALESCE(${data.published        ?? null}, published),
+      author           = COALESCE(${data.author           ?? null}, author),
+      tags             = COALESCE(${data.tags             ?? null}, tags),
+      meta_title       = COALESCE(${data.meta_title       ?? null}, meta_title),
       meta_description = COALESCE(${data.meta_description ?? null}, meta_description),
-      updated_at = now()
+      category         = COALESCE(${data.category         ?? null}, category),
+      read_time        = COALESCE(${data.read_time        ?? null}, read_time),
+      faqs             = COALESCE(${data.faqs ? JSON.stringify(data.faqs) : null}, faqs),
+      updated_at       = now()
     WHERE id = ${id}
     RETURNING *
   `;

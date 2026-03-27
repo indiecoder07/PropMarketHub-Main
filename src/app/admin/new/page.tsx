@@ -19,6 +19,9 @@ export default function NewPostPage() {
     tags:             '',
     meta_title:       '',
     meta_description: '',
+    category:         '',
+    read_time:        '',
+    faqs:             '',
   });
 
   const autoSlug = (title: string) =>
@@ -35,6 +38,19 @@ export default function NewPostPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.title || !form.slug) return alert('Title and slug are required.');
+
+    // Validate FAQs JSON if provided
+    let parsedFaqs = null;
+    if (form.faqs.trim()) {
+      try {
+        parsedFaqs = JSON.parse(form.faqs);
+        if (!Array.isArray(parsedFaqs)) throw new Error('FAQs must be a JSON array.');
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : String(err);
+        return alert(`Invalid FAQs JSON: ${msg}`);
+      }
+    }
+
     setSaving(true);
     try {
       const res = await fetch('/api/posts', {
@@ -42,11 +58,14 @@ export default function NewPostPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
-          tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+          tags:     form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+          category: form.category.trim() || null,
+          read_time: form.read_time.trim() || null,
+          faqs:     parsedFaqs,
         }),
       });
       if (res.ok) {
-        router.refresh(); // invalidate Next.js cache so dashboard sees new post
+        router.refresh();
         router.push('/admin');
       } else {
         const data = await res.json();
@@ -134,6 +153,29 @@ export default function NewPostPage() {
 
         <div className={styles.grid2}>
           <div>
+            <label className={styles.label}>Category</label>
+            <input
+              type="text"
+              className={styles.input}
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+              placeholder="e.g. Suburbs, Finance, Investing, Buying"
+            />
+          </div>
+          <div>
+            <label className={styles.label}>Read Time</label>
+            <input
+              type="text"
+              className={styles.input}
+              value={form.read_time}
+              onChange={(e) => setForm({ ...form, read_time: e.target.value })}
+              placeholder="e.g. 5 min read"
+            />
+          </div>
+        </div>
+
+        <div className={styles.grid2}>
+          <div>
             <label className={styles.label}>SEO Title (optional)</label>
             <input
               type="text"
@@ -153,6 +195,22 @@ export default function NewPostPage() {
               placeholder="Override the meta description for search engines"
             />
           </div>
+        </div>
+
+        <div>
+          <label className={styles.label}>
+            FAQs (JSON array — optional)
+          </label>
+          <textarea
+            className={styles.textareaCode}
+            value={form.faqs}
+            rows={6}
+            onChange={(e) => setForm({ ...form, faqs: e.target.value })}
+            placeholder={`[
+  { "question": "What is rental yield?", "answer": "Rental yield is the annual rental income as a percentage of the property's purchase price." }
+]`}
+          />
+          <p className={styles.hint}>Enter a valid JSON array of {`{ question, answer }`} objects. Leave blank if no FAQs.</p>
         </div>
 
         <div>
