@@ -58,11 +58,12 @@ const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'WebApplication',
+      '@type': 'SoftwareApplication',
       name: 'Rent vs Buy Calculator',
       url: 'https://propmarkethub.com.au/rent-vs-buy-calculator',
       applicationCategory: 'FinanceApplication',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+      author: { '@type': 'Organization', name: 'PropMarketHub', url: 'https://propmarkethub.com.au' },
     },
     {
       '@type': 'FAQPage',

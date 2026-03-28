@@ -58,11 +58,12 @@ const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'WebApplication',
+      '@type': 'SoftwareApplication',
       name: 'Property Investment Calculator',
       url: 'https://propmarkethub.com.au/property-investment-calculator',
       applicationCategory: 'FinanceApplication',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+      author: { '@type': 'Organization', name: 'PropMarketHub', url: 'https://propmarkethub.com.au' },
     },
     {
       '@type': 'FAQPage',

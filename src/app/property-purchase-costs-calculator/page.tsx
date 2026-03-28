@@ -58,11 +58,12 @@ const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'WebApplication',
+      '@type': 'SoftwareApplication',
       name: 'Property Purchase Costs Calculator',
       url: 'https://propmarkethub.com.au/property-purchase-costs-calculator',
       applicationCategory: 'FinanceApplication',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+      author: { '@type': 'Organization', name: 'PropMarketHub', url: 'https://propmarkethub.com.au' },
     },
     {
       '@type': 'FAQPage',
