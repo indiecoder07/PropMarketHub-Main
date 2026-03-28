@@ -59,6 +59,13 @@
   max-width: 300px;
 }
 
+.select {
+  composes: input;
+  max-width: 380px;
+  cursor: pointer;
+  appearance: auto;
+}
+
 .publishLabel {
   display: flex;
   align-items: center;

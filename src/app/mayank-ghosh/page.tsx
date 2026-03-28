@@ -187,12 +187,12 @@ export default async function MayankGhoshPage() {
                   with buyers and investors across Greater Sydney and regional NSW.
                 </p>
                 <a
-                  href="https://bluehillrealestate.com.au"
+                  href="https://www.thebluehill.com.au/agent-profile?agent_id=42003"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.ctaBtn}
                 >
-                  Visit Blue Hill Real Estate →
+                  Contact Mayank Ghosh →
                 </a>
               </div>
 

@@ -39,14 +39,28 @@ export function sanitizePostContent(html: string): string {
   // 2. Strip TipTap-encoded frontmatter wrapped in <p>---</p> markers
   content = content.replace(/<p>\s*-{3}\s*<\/p>[\s\S]*?<p>\s*-{3}\s*<\/p>\s*/i, '');
 
+  // Helper: strip all HTML tags and decode common entities to get plain text
+  const innerText = (html: string) =>
+    html
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/<[^>]+>/g, '')
+      .replace(/&quot;/g, '"')
+      .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .trim();
+
   // 3a. Strip a single leading <p> whose TEXT content starts with a frontmatter key.
   //     Handles the case where all key:value pairs were collapsed into one paragraph,
+  //     with or without inner HTML (e.g. <strong>, <br> from TipTap).
   //     e.g. <p>title: "..." date: 2026-03-05 category: Investment Tips tags: [...]</p>
+  //     e.g. <p><strong>title:</strong> "..." date: ...</p>
   content = content.replace(
-    /^\s*<p>([^<]*)<\/p>/i,
-    (match, innerText) => {
-      const stripped = innerText.replace(/&quot;/g, '"').replace(/&#\d+;/g, '').trim();
-      return FRONTMATTER_KEY_RE.test(stripped) ? '' : match;
+    /^\s*<p>([\s\S]*?)<\/p>/i,
+    (match, inner) => {
+      const text = innerText(inner);
+      return FRONTMATTER_KEY_RE.test(text) ? '' : match;
     }
   );
 
@@ -57,10 +71,25 @@ export function sanitizePostContent(html: string): string {
   while (prev !== content) {
     prev = content;
     content = content.replace(
-      /^\s*<p>([^<]*)<\/p>/i,
-      (match, innerText) => {
-        const stripped = innerText.replace(/&quot;/g, '"').replace(/&#\d+;/g, '').trim();
-        return FRONTMATTER_KEY_RE.test(stripped) ? '' : match;
+      /^\s*<p>([\s\S]*?)<\/p>/i,
+      (match, inner) => {
+        const text = innerText(inner);
+        return FRONTMATTER_KEY_RE.test(text) ? '' : match;
+      }
+    );
+    content = content.trim();
+  }
+
+  // 3c. Also catch frontmatter accidentally stored inside a heading tag
+  //     (TipTap sometimes wraps pasted content in <h2> or <h3>).
+  prev = '';
+  while (prev !== content) {
+    prev = content;
+    content = content.replace(
+      /^\s*<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/i,
+      (match, inner) => {
+        const text = innerText(inner);
+        return FRONTMATTER_KEY_RE.test(text) ? '' : match;
       }
     );
     content = content.trim();

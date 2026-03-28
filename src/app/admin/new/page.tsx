@@ -215,12 +215,14 @@ export default function NewPostPage() {
 
         <div>
           <label className={styles.label}>Author</label>
-          <input
-            type="text"
-            className={styles.inputNarrow}
+          <select
+            className={styles.select}
             value={form.author}
             onChange={(e) => setForm({ ...form, author: e.target.value })}
-          />
+          >
+            <option value="PropMarketHub">PropMarketHub (links to /about)</option>
+            <option value="Mayank Ghosh">Mayank Ghosh (links to /mayank-ghosh)</option>
+          </select>
         </div>
 
         <div>

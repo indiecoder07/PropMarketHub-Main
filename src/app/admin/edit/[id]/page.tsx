@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor';
 import type { Post } from '@/lib/db';
 import styles from '../../form.module.css';
 
-export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id }   = use(params);
+export default function EditPostPage({ params }: { params: { id: string } }) {
+  const { id }   = params;
   const router   = useRouter();
   const [saving,  setSaving]  = useState(false);
   const [loading, setLoading] = useState(true);
@@ -224,12 +224,14 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
 
         <div>
           <label className={styles.label}>Author</label>
-          <input
-            type="text"
-            className={styles.inputNarrow}
+          <select
+            className={styles.select}
             value={form.author}
             onChange={(e) => setForm({ ...form, author: e.target.value })}
-          />
+          >
+            <option value="PropMarketHub">PropMarketHub (links to /about)</option>
+            <option value="Mayank Ghosh">Mayank Ghosh (links to /mayank-ghosh)</option>
+          </select>
         </div>
 
         <div>
